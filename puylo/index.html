@@ -20,11 +20,20 @@
       justify-content: center;
       text-align: center;
       background: url('puylo.jpg') no-repeat center center;
-      background-size: cover;
+      background-size: contain;
       background-color: black;
     }
 
     .card {
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 90%;
+    }
+    .card2 {
       position: absolute;
       top: 40px;
       right: 40px;
@@ -57,17 +66,28 @@
       text-decoration: underline;
     }
 
-    /* 🔻 Адаптація для мобільних */
     @media (max-width: 768px) {
       body {
     background: url('puylo-mobile.png') no-repeat center center;
     background-size: cover;
   }
-      .card {
-        top: 480px;
-        right: 20px;
-        padding: 1rem;
-      }
+
+  .card {
+  position: absolute;
+  top: 56%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95vw;
+  padding: 1rem;
+}
+.card2 {
+  position: absolute;
+  top: 71.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95vw;
+  padding: 0.5rem;
+}
 
       h1 {
         font-size: 1.5rem;
@@ -85,12 +105,45 @@
 </head>
 <body>
   <div class="card">
-    <h1>ПОСИЛАННЯ НА КРИПТО ГАМАНЦІ</h1>
-    <p>Bitcoin / Ethereum / Solana</p>
-    <a href="">0000000000 0000000000000 0000000000000</a>
-    <a href="">11111111 11111111111 11111111111</a>
-    <a href="">22222222222 2222222222222 22222222222222</a>
+    <h1>Баланс USDT (TRC20)</h1>
+    <p id="balance">Завантаження...</p>
+    <button onclick="fetchUSDTBalance()">Оновити баланс</button>
   </div>
+  <div class="card2">
+    <h1>TRON USDT (TRC20)</h1>
+    <p>TF9HEKAiQJssPJkgR3uKfGq6KCV94zaGRv</p>
+  </div>
+
+
+  <script>
+    const walletAddress = 'TF9HEKAiQJssPJkgR3uKfGq6KCV94zaGRv';
+    const usdtContract = 'TXLAQ63Xg1NAzckPwKHvzw7CSEmLMEqcdj';
+
+    async function fetchUSDTBalance() {
+      const url = `https://api.trongrid.io/v1/accounts/${walletAddress}`;
+
+      document.getElementById('balance').innerText = 'Оновлюється...';
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const tokens = data?.data?.[0]?.trc20 || [];
+        const usdt = tokens.find(t => t[usdtContract]);
+        const balance = usdt ? parseFloat(usdt[usdtContract]).toFixed(2) : '0.00';
+
+        document.getElementById('balance').innerText = `${balance} USDT`;
+      } catch (err) {
+        document.getElementById('balance').innerText = 'Помилка при запиті';
+        console.error(err);
+      }
+    }
+
+    fetchUSDTBalance();
+    setInterval(fetchUSDTBalance, 30000);
+  </script>
 </body>
+
+
 </html>
 
