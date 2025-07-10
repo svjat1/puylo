@@ -19,13 +19,15 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      background: url('puylo.jpg') no-repeat center;
+      background: url('puylo.jpg') no-repeat center center;
       background-size: cover;
+      background-color: black;
     }
+
     .card {
-        position: absolute;
-       top: 40px;
-        right: 40px;
+      position: absolute;
+      top: 40px;
+      right: 40px;
       background: rgba(0, 0, 0, 0.6);
       padding: 2rem;
       border-radius: 10px;
@@ -46,20 +48,49 @@
       color: #ffd700;
       text-decoration: none;
       font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+      word-break: break-word;
     }
 
     a:hover {
       text-decoration: underline;
+    }
+
+    /* 🔻 Адаптація для мобільних */
+    @media (max-width: 768px) {
+      body {
+    background: url('puylo-mobile.png') no-repeat center center;
+    background-size: cover;
+  }
+      .card {
+        top: 480px;
+        right: 20px;
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      a {
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
 <body>
   <div class="card">
     <h1>ПОСИЛАННЯ НА КРИПТО ГАМАНЦІ</h1>
-    <p>Bitcoin / Ethereum/ Solana</p>
-    <a href="">0000000000 0000000000000 0000000000000</a><br/>
-        <a href="">11111111 11111111111 11111111111</a><br/>
-        <a href="">22222222222 2222222222222 22222222222222</a><br/>
+    <p>Bitcoin / Ethereum / Solana</p>
+    <a href="">0000000000 0000000000000 0000000000000</a>
+    <a href="">11111111 11111111111 11111111111</a>
+    <a href="">22222222222 2222222222222 22222222222222</a>
   </div>
 </body>
 </html>
+
