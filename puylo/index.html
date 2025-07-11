@@ -14,7 +14,7 @@
     body {
       font-family: sans-serif;
       color: white;
-      height: 100vh;
+      height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -70,6 +70,7 @@
       body {
     background: url('puylo-mobile.png') no-repeat center center;
     background-size: cover;
+    position: relative;
   }
 
   .card {
@@ -111,7 +112,7 @@
   </div>
   <div class="card2">
     <h1>TRON USDT (TRC20)</h1>
-    <p>TF9HEKAiQJssPJkgR3uKfGq6KCV94zaGRv</p>
+    <a href="#" id="wallet" onclick="copyWallet(this)">TF9HEKAiQJssPJkgR3uKfGq6KCV94zaGRv</a>
   </div>
 
 
@@ -142,6 +143,23 @@
     fetchUSDTBalance();
     setInterval(fetchUSDTBalance, 30000);
   </script>
+  <script>
+    function copyWallet(el) {
+      const text = el.innerText;
+  
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          el.innerText = 'Скопійовано ✅';
+          setTimeout(() => {
+            el.innerText = text;
+          }, 1000);
+        })
+        .catch(err => {
+          console.error('Помилка копіювання', err);
+        });
+    }
+  </script>
+  
 </body>
 
 
