@@ -27,22 +27,35 @@
 
     .card {
       position: absolute;
-      top: 58%;
-      left: 13.5%;
-      /* background: rgba(0, 0, 0, 0.6); */
-      padding: 1.3rem;
-      border-radius: 10px;
-      max-width: 90%;
+      top: 66%;
+      right:40%;
+      background: #1f1810;
+      padding: 2rem 2rem;
+      border: #a58054 7px solid;
+      border-radius: 33px;
+
+       width: 25vw;           /* ширина адаптивна */
+       min-width: 250px;      /* не менше */
+       max-width: 90%;        /* але не більше */
+       height: auto;
+
+      transform: translate(-50%, -50%);
     }
     .card2 {
       position: absolute;
-      top: 56%;
-      right: 40%;
+      top: 66%;
+      left:60%;
       background: #1f1810;
       padding: 3rem 2rem;
       border: #a58054 7px solid;
       border-radius: 33px;
-      max-width: 90%;
+      
+       width: 25vw;           /* ширина адаптивна */
+       min-width: 250px;      /* не менше */
+       max-width: 90%;        /* але не більше */
+       height: auto;
+
+      transform: translate(-50%, -50%);
     }
 
     h1 {
@@ -90,6 +103,12 @@
   transform: translate(-50%, -50%);
   width: 95vw;
   padding: 0.5rem;
+
+      background: none;
+      padding: 0px;
+      border: none;
+      border-radius: none;
+
 }
 
       h1 {
@@ -107,14 +126,17 @@
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Баланс USDT (TRC20)</h1>
-    <p id="balance">Завантаження...</p>
-    <button onclick="fetchUSDTBalance()">Оновити баланс</button>
-  </div>
-  <div class="card2">
-    <h1>TRON USDT (TRC20)</h1>
-    <a href="#" id="wallet" onclick="copyWallet(this)">TF9HEKAiQJssPJkgR3uKfGq6KCV94zaGRv</a>
+  <div class="bg-wrapper">
+    <div class="card">
+      <h1>Баланс USDT (TRC20)</h1>
+      <p id="balance">Завантаження...</p>
+      <button onclick="fetchUSDTBalance()">Оновити баланс</button>
+    </div>
+
+    <div class="card2">
+      <h1>TRON USDT (TRC20)</h1>
+      <a href="#" id="wallet" onclick="copyWallet(this)">TF9HEKAiQJssPJkgR3uKfGq6KCV94zaGRv</a>
+    </div>
   </div>
 
 
