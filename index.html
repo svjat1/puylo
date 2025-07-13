@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finish him!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      color: white;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: url('puylo.jpg') no-repeat;
+      background-size: cover;
+      background-color: black;
+      position: relative;
+    }
+    .text{
+      position: absolute;
+      top:9%;
+       font-weight: bold;
+       font-size: 40px;
+    }
+    .card {
+      position: absolute;
+      top: 66%;
+      right:40%;
+      background: #1f1810;
+      padding: 2rem 2rem;
+      border: #a58054 7px solid;
+      border-radius: 33px;
+
+       width: 25vw;           
+       min-width: 250px;     
+       max-width: 90%;       
+       height: auto;
+
+      transform: translate(-50%, -50%);
+    }
+    .card2 {
+      position: absolute;
+      top: 66%;
+      left:60%;
+      background: #1f1810;
+      padding: 3rem 2rem;
+      border: #a58054 7px solid;
+      border-radius: 33px;
+      
+       width: 25vw;          
+       min-width: 250px;     
+       max-width: 90%;       
+       height: auto;
+
+      transform: translate(-50%, -50%);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+      word-break: break-word;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      body {
+    background: url('puylo-mobile.png') no-repeat center center;
+    background-size: cover;
+    position: relative;
+  }
+
+  .card {
+  position: absolute;
+  top: 74%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95vw;
+  padding: 1rem;
+
+   background: none;
+      padding: none;
+      border: none;
+      border-radius:none;
+}
+.card2 {
+  position: absolute;
+  top: 89.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95vw;
+  padding: 0.5rem;
+
+      background: none;
+      padding: 0px;
+      border: none;
+      border-radius: none;
+
+}
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      a {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="text">
+    ЗБІР НА ВБИВСТВО ХУЙЛА
+  </div>
+  <div class="bg-wrapper">
+    <div class="card">
+      <h1>Баланс USDT (TRC20)</h1>
+      <p id="balance">Завантаження...</p>
+      <button onclick="fetchUSDTBalance()">Оновити баланс</button>
+    </div>
+
+    <div class="card2">
+      <h1>TRON USDT (TRC20)</h1>
+      <a href="#" id="wallet" onclick="copyWallet(this)">TF9HEKAiQJssPJkgR3uKfGq6KCV94zaGRv</a>
+    </div>
+  </div>
+
+
+  <script>
+    const walletAddress = 'TF9HEKAiQJssPJkgR3uKfGq6KCV94zaGRv';
+    const usdtContract = 'TXLAQ63Xg1NAzckPwKHvzw7CSEmLMEqcdj';
+
+    async function fetchUSDTBalance() {
+      const url = `https://api.trongrid.io/v1/accounts/${walletAddress}`;
+
+      document.getElementById('balance').innerText = 'Оновлюється...';
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const tokens = data?.data?.[0]?.trc20 || [];
+        const usdt = tokens.find(t => t[usdtContract]);
+        const balance = usdt ? parseFloat(usdt[usdtContract]).toFixed(2) : '0.00';
+
+        document.getElementById('balance').innerText = `${balance} USDT`;
+      } catch (err) {
+        document.getElementById('balance').innerText = 'Помилка при запиті';
+        console.error(err);
+      }
+    }
+
+    fetchUSDTBalance();
+    setInterval(fetchUSDTBalance, 30000);
+  </script>
+  <script>
+    function copyWallet(el) {
+      const text = el.innerText;
+  
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          el.innerText = 'Скопійовано ✅';
+          setTimeout(() => {
+            el.innerText = text;
+          }, 1000);
+        })
+        .catch(err => {
+          console.error('Помилка копіювання', err);
+        });
+    }
+  </script>
+  
+</body>
+
+
+</html>
+
